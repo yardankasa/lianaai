@@ -1,7 +1,7 @@
 
 <?php
 
-// Idea Man , Author , Creator , publisher = Mahdi Eskandari https://github.com/yardankasa  , @After_world
+// Idea Man , Author , Creator , publisher = https://github.com/yardankasa  , @After_world
 // -- # -- ALL RIGHTS Reserved! 
 // Follow for more T.me/pejvaksource
 
