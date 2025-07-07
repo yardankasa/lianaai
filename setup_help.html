@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>راهنمای جامع راه‌اندازی ربات هوش مصنوعی لیانا</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.24-.48-.51-.9-.8-1.22l-1.4-1.41-1.07-1.07-1.14-1.14-.15-.15L12 9.24l-3.53 3.53 1.41 1.41 2.12 2.12 1.41 1.41 1.41 1.41c.64-.64 1.13-1.39 1.47-2.2zM12 4c3.95.49 7 3.85 7 7.93 0 .62-.08 1.21-.21 1.79L15 9V8c0-1.1-.9-2-2-2H9v1.93l.93-.93.7-.7.71-.71L12 6.76l3.53-3.53-1.41-1.41-2.12-2.12-1.41-1.41-1.41-1.41C5.36 4.64 4.87 5.39 4.53 6.2z'/%3E%3C/svg%3E' type='image/svg+xml'>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Variables */
+        :root {
+            --primary-color: #007bff; /* Blue */
+            --secondary-color: #6c757d; /* Gray */
+            --accent-color: #28a745; /* Green */
+            --background-light: #f4f7f6; /* Light gray background */
+            --background-dark: #eef2f1; /* Slightly darker gray for sections */
+            --text-dark: #2c3e50; /* Darker text for readability */
+            --text-light: #34495e; /* Lighter dark text */
+            --border-color: #e0e6ea;
+            --card-bg: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+            --gradient-start: #007bff;
+            --gradient-end: #00bcd4; /* Cyan for modern feel */
+        }
+
+        /* General Body & Container */
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, var(--background-light) 0%, var(--background-dark) 100%);
+            color: var(--text-light);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            direction: rtl;
+            text-align: right;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px var(--shadow-light);
+            padding: 0; /* Padding handled by sections */
+            max-width: 950px;
+            width: 95%;
+            margin: 50px auto;
+            box-sizing: border-box;
+            overflow: hidden; /* Ensure rounded corners */
+            position: relative;
+        }
+
+        /* Hero Section - About Author & Main Title */
+        .hero-section {
+            background: linear-gradient(to left, var(--gradient-start), var(--gradient-end));
+            color: #fff;
+            padding: 60px 50px;
+            text-align: center;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="25" cy="25" r="15" fill="rgba(255,255,255,0.1)" /><circle cx="75" cy="75" r="15" fill="rgba(255,255,255,0.1)" /><circle cx="50" cy="50" r="10" fill="rgba(255,255,255,0.05)" /></svg>') repeat;
+            background-size: 80px;
+            opacity: 0.3;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5em;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section p.lead {
+            font-size: 1.3em;
+            font-weight: 500;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .author-info-hero {
+            margin-top: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .author-info-hero h2 {
+            font-size: 1.8em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #fff;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+        .author-info-hero h2::after {
+            content: '';
+            display: block;
+            width: 70%;
+            height: 3px;
+            background-color: #fff;
+            margin: 5px auto 0;
+            border-radius: 2px;
+        }
+
+        .author-links-hero {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .author-links-hero a {
+            color: #fff;
+            text-decoration: none;
+            transition: transform 0.3s ease, color 0.3s ease;
+            font-size: 1.1em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        .author-links-hero a:hover {
+            color: #e0f7fa;
+            transform: translateY(-5px);
+            opacity: 1;
+        }
+
+        .author-links-hero a i {
+            font-size: 3.5em; /* Larger icons for impact */
+            margin-bottom: 10px;
+            filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.3));
+        }
+
+        /* Main Content Sections */
+        .content-section {
+            padding: 40px 50px;
+            background-color: var(--card-bg);
+        }
+
+        .section {
+            margin-bottom: 35px;
+            padding: 30px;
+            border-radius: 15px;
+            background-color: var(--background-dark);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
+            position: relative;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .section::before {
+            content: attr(data-step-number);
+            position: absolute;
+            top: -20px; /* Adjust to be more prominent */
+            right: 25px;
+            background: var(--primary-color);
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8em;
+            font-weight: 800;
+            box-shadow: 0 4px 15px var(--shadow-medium);
+            z-index: 2; /* Bring to front */
+            border: 3px solid #fff; /* White border */
+        }
+
+        .section h2 {
+            color: var(--text-dark); /* Changed from primary to dark text */
+            font-size: 2em;
+            font-weight: 800;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-right: 70px; /* More space for step number */
+            border-bottom: 3px solid var(--primary-color); /* Thicker border */
+            padding-bottom: 15px;
+            display: inline-block;
+            line-height: 1.3;
+        }
+
+        .section p {
+            color: var(--text-dark);
+            margin-bottom: 18px;
+        }
+
+        .section ul {
+            list-style: none;
+            padding-right: 0;
+            margin: 15px 0;
+        }
+
+        .section ul li {
+            position: relative;
+            padding-right: 35px; /* More space for icon */
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        .section ul li:last-child {
+            margin-bottom: 0;
+        }
+
+        .section ul li::before {
+            content: '✅'; /* Checkmark emoji for modern look */
+            font-size: 1.4em;
+            position: absolute;
+            right: 0;
+            top: -2px;
+        }
+
+        /* Code & Links */
+        code {
+            background-color: var(--background-dark);
+            color: var(--primary-color);
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            font-size: 0.98em;
+            border: 1px solid var(--border-color);
+            direction: ltr;
+            display: inline-block;
+            white-space: nowrap;
+            overflow-x: auto; /* Allow horizontal scroll for long code */
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease, text-decoration 0.3s ease;
+            font-weight: 600;
+        }
+
+        a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        /* Call to Action */
+        .call-to-action {
+            text-align: center;
+            margin-top: 40px;
+            padding: 40px;
+            border-radius: 15px;
+            background: linear-gradient(45deg, var(--accent-color), #20c997); /* Green to lighter green */
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .call-to-action::before {
+            content: '💬'; /* Speech bubble icon */
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 3em;
+            opacity: 0.2;
+            transform: rotate(-15deg);
+        }
+
+        .call-to-action h3 {
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            color: #fff;
+            font-weight: 800;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .call-to-action p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #e6ffe6;
+        }
+
+        .call-to-action .contact-link {
+            display: inline-block;
+            background-color: #fff;
+            color: var(--accent-color);
+            padding: 15px 35px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+        }
+
+        .call-to-action .contact-link:hover {
+            background-color: #f0f0f0;
+            color: #1e7e34;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px dashed var(--border-color);
+            font-size: 0.95em;
+            color: var(--secondary-color);
+            padding-bottom: 20px; /* Add some space at bottom */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 800px) {
+            .container {
+                margin: 30px auto;
+                width: 98%;
+            }
+            .hero-section {
+                padding: 50px 30px;
+            }
+            .hero-section h1 {
+                font-size: 2.8em;
+            }
+            .hero-section p.lead {
+                font-size: 1.1em;
+            }
+            .author-info-hero h2 {
+                font-size: 1.6em;
+            }
+            .author-links-hero a i {
+                font-size: 3em;
+            }
+            .content-section {
+                padding: 30px;
+            }
+            .section {
+                padding: 25px;
+                margin-bottom: 30px;
+            }
+            .section::before {
+                width: 45px;
+                height: 45px;
+                font-size: 1.6em;
+                top: -15px;
+                right: 20px;
+            }
+            .section h2 {
+                font-size: 1.8em;
+                padding-right: 60px;
+            }
+            .section ul li {
+                font-size: 1em;
+            }
+            .section ul li::before {
+                font-size: 1.2em;
+            }
+            .call-to-action {
+                padding: 30px;
+            }
+            .call-to-action h3 {
+                font-size: 2em;
+            }
+            .call-to-action p {
+                font-size: 1.1em;
+            }
+            .call-to-action .contact-link {
+                padding: 12px 25px;
+                font-size: 1.1em;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .hero-section {
+                padding: 40px 20px;
+            }
+            .hero-section h1 {
+                font-size: 2.2em;
+            }
+            .hero-section p.lead {
+                font-size: 0.95em;
+            }
+            .author-info-hero h2 {
+                font-size: 1.4em;
+            }
+            .author-links-hero {
+                flex-direction: row; /* Keep row for small screens too, but adjust gap */
+                gap: 20px;
+            }
+            .author-links-hero a i {
+                font-size: 2.5em;
+            }
+            .content-section {
+                padding: 20px;
+            }
+            .section {
+                padding: 20px;
+                margin-bottom: 25px;
+            }
+            .section::before {
+                width: 40px;
+                height: 40px;
+                font-size: 1.4em;
+                top: -12px;
+                right: 15px;
+            }
+            .section h2 {
+                font-size: 1.6em;
+                padding-right: 50px;
+            }
+            .section p, .section ul li {
+                font-size: 0.95em;
+            }
+            .call-to-action {
+                padding: 25px;
+            }
+            .call-to-action h3 {
+                font-size: 1.8em;
+            }
+            .call-to-action p {
+                font-size: 1em;
+            }
+            .call-to-action .contact-link {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero-section">
+            <h1>راهنمای جامع راه‌اندازی ربات هوش مصنوعی لیانا</h1>
+            <p class="lead">این راهنما گام‌به‌گام شما را در فرآیند راه‌اندازی و پیکربندی ربات پیشرفته هوش مصنوعی همراهی می‌کند. با دنبال کردن این دستورالعمل‌ها، می‌توانید به سرعت ربات خود را فعال کرده و از قابلیت‌های آن بهره‌مند شوید.</p>
+
+            <div class="author-info-hero">
+                <h2>درباره نویسنده</h2>
+                <div class="author-links-hero">
+                    <a href="https://github.com/yardankasa" target="_blank" title="پروفایل گیت‌هاب مهدی اسکندری">
+                        <i class="fab fa-github"></i>
+                        <span>گیت‌هاب</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mahdi-eskandari-4b04b82b9" target="_blank" title="پروفایل لینکدین مهدی اسکندری">
+                        <i class="fab fa-linkedin"></i>
+                        <span>لینکدین</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main class="content-section">
+            <div class="section" data-step-number="۱">
+                <h2>۱. اخذ توکن و کلید API</h2>
+                <p>برای آغاز، لازم است دو عنصر کلیدی را تهیه فرمایید:</p>
+                <ul>
+                    <li>**توکن ربات:** این توکن شناسه‌ منحصر به فرد ربات شما در بستر تلگرام است. لطفاً جهت دریافت توکن خود، به ربات اختصاصی ما به نشانی <a href="https://t.me/botfather" target="_blank">@botfather</a> مراجعه نمایید.</li>
+                    <li>**کلید API جمنای (Gemini Key):** این کلید دسترسی شما را به قابلیت‌های پیشرفته هوش مصنوعی گوگل فراهم می‌آورد. برای دریافت آن، به پلتفرم <a href="https://aistudio.google.com/" target="_blank">Google AI Studio</a> مراجعه فرمایید.</li>
+                </ul>
+            </div>
+
+            <div class="section" data-step-number="۲">
+                <h2>۲. پیکربندی امنیتی: فایل `.env-private`</h2>
+                <p>به منظور حفظ حداکثری امنیت و تضمین کارایی بهینه، توکن ربات و کلید API جمنای را در فایل <code>.env-private</code> جایگذاری کنید. این رویکرد، اطلاعات حساس شما را از دسترسی‌های غیرمجاز محافظت کرده و فرآیند مدیریت پیکربندی را تسهیل می‌بخشد.</p>
+            </div>
+
+            <div class="section" data-step-number="۳">
+                <h2>۳. تنظیمات هسته ربات: ویرایش `bot.php`</h2>
+                <p>فایل <code>bot.php</code> حاوی منطق اصلی ربات شماست. بخش‌های مشخص شده در این فایل، از جمله **آیدی عددی ادمین** را مطابق با نیازهای خود ویرایش نمایید. این گام برای سفارشی‌سازی و کنترل دقیق‌تر عملکرد ربات ضروری است.</p>
+            </div>
+
+            <div class="section" data-step-number="۴">
+                <h2>۴. مکانیزم پاسخ‌گویی ربات</h2>
+                <p>معماری ربات به گونه‌ای طراحی شده است که یک <code>system prompt</code> مشخص را دریافت می‌کند. این بدان معناست که ربات به پرسش‌های عمومی کاربران به صورت آزادانه پاسخ نمی‌دهد؛ بلکه صرفاً **پاسخ‌های از پیش تعیین شده** را بر اساس دستورالعمل‌های شما ارائه می‌دهد. این ویژگی کنترل کاملی بر خروجی‌های ربات فراهم می‌کند.</p>
+            </div>
+
+            <div class="section" data-step-number="۵">
+                <h2>۵. تنظیم وب‌هوک (Webhook)</h2>
+                <p>برای فعال‌سازی ارتباط بی‌درنگ میان سرور تلگرام و ربات شما، لازم است وب‌هوک را بر روی فایل <code>bot.php</code> تنظیم کنید. این فرآیند امکان دریافت به‌روزرسانی‌های لحظه‌ای از پیام‌های کاربران را فراهم می‌آورد.</p>
+            </div>
+
+            <div class="call-to-action">
+                <h3>نکته مهم و پشتیبانی</h3>
+                <p>چنانچه در هر یک از مراحل راه‌اندازی یا استفاده از ربات با پرسش یا ابهامی مواجه شدید، تیم پشتیبانی ما آماده پاسخگویی است. لطفاً جهت دریافت راهنمایی‌های بیشتر، به کانال تلگرام ما مراجعه فرمایید:</p>
+                <a href="https://t.me/After_World" target="_blank" class="contact-link">ورود به کانال پشتیبانی</a>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; ۲۰۲۴ راهنمای راه‌اندازی ربات. تمامی حقوق محفوظ است.</p>
+        </footer>
+    </div>
+</body>
+</html>
